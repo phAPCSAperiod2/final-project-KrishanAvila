@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "App",
+      "projectName": "final-project-KrishanAvila_4b05cb32"
+    },
+    {
+      "type": "java",
       "name": "Run Main",
       "request": "launch",
       "mainClass": "Main",
