@@ -29,7 +29,22 @@ public class App {
                     hoursSlept = (24 - sleepTime) + wakeTime;
                 }
 
-                System.out.println("You slept for " + hoursSlept + " hours.");
+                System.out.print("How rested do you feel? (1-5): ");
+                int restRating = input.nextInt();
+
+                System.out.println("\n--- Sleep Summary ---");
+                System.out.println("Sleep time: " + sleepTime);
+                System.out.println("Wake time: " + wakeTime);
+                System.out.println("Hours slept: " + hoursSlept);
+                System.out.println("Rest rating: " + restRating + "/5");
+
+                if (restRating <= 2) {
+                    System.out.println("You are not well rested.");
+                } else if (restRating == 3) {
+                    System.out.println("You are somewhat rested.");
+                } else {
+                    System.out.println("You feel well rested.");
+                }
 
             } else if (choice == 2) {
                 running = false;
