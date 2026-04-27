@@ -5,7 +5,7 @@ public class App {
         Scanner input = new Scanner(System.in);
         boolean running = true;
 
-        // Arrays to store up to 7 days
+        // Store up to 7 days
         int[] sleepTimes = new int[7];
         int[] wakeTimes = new int[7];
         int[] hoursSleptList = new int[7];
@@ -17,7 +17,8 @@ public class App {
         while (running) {
             System.out.println("\n1. Enter sleep data");
             System.out.println("2. View sleep history");
-            System.out.println("3. Exit");
+            System.out.println("3. Get sleep recommendation");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
             int choice = input.nextInt();
 
@@ -79,6 +80,35 @@ public class App {
                 }
 
             } else if (choice == 3) {
+
+                if (count == 0) {
+                    System.out.println("No data to analyze.");
+                } else {
+                    int totalSleep = 0;
+                    int totalRating = 0;
+
+                    for (int i = 0; i < count; i++) {
+                        totalSleep += hoursSleptList[i];
+                        totalRating += restRatings[i];
+                    }
+
+                    int avgSleep = totalSleep / count;
+                    int avgRating = totalRating / count;
+
+                    System.out.println("\n--- Recommendation ---");
+                    System.out.println("Average sleep: " + avgSleep + " hours");
+                    System.out.println("Average rest rating: " + avgRating + "/5");
+
+                    if (avgSleep < 7 || avgRating <= 2) {
+                        System.out.println("Go to bed earlier. Aim for 7-9 hours of sleep.");
+                    } else if (avgSleep <= 9 && avgRating >= 3) {
+                        System.out.println("Your sleep schedule looks good. Stay consistent.");
+                    } else {
+                        System.out.println("You may be oversleeping. Try waking up a bit earlier.");
+                    }
+                }
+
+            } else if (choice == 4) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
