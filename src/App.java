@@ -3,6 +3,19 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+
+        // Create user at start
+        System.out.println("Enter your age: ");
+        int age = input.nextInt();
+
+        System.out.println("Enter your height in inches: ");
+        double height = input.nextDouble();
+
+        System.out.println("Enter your weight: ");
+        double weight = input.nextDouble();
+
+        User user = new User(age, height, weight);
+
         boolean running = true;
 
         // Store up to 7 days
@@ -18,7 +31,8 @@ public class App {
             System.out.println("\n1. Enter sleep data");
             System.out.println("2. View sleep history");
             System.out.println("3. Get sleep recommendation");
-            System.out.println("4. Exit");
+            System.out.println("4. View user info");
+            System.out.println("5. Exit");
             System.out.print("Choose an option: ");
             int choice = input.nextInt();
 
@@ -46,7 +60,6 @@ public class App {
                 System.out.print("How rested do you feel? (1-5): ");
                 int restRating = input.nextInt();
 
-                // Store data
                 sleepTimes[count] = sleepTime;
                 wakeTimes[count] = wakeTime;
                 hoursSleptList[count] = hoursSlept;
@@ -54,8 +67,6 @@ public class App {
                 count++;
 
                 System.out.println("\n--- Sleep Summary ---");
-                System.out.println("Sleep time: " + sleepTime);
-                System.out.println("Wake time: " + wakeTime);
                 System.out.println("Hours slept: " + hoursSlept);
                 System.out.println("Rest rating: " + restRating + "/5");
 
@@ -68,11 +79,8 @@ public class App {
 
                     for (int i = 0; i < count; i++) {
                         System.out.println("\nDay " + (i + 1));
-                        System.out.println("Sleep: " + sleepTimes[i]);
-                        System.out.println("Wake: " + wakeTimes[i]);
                         System.out.println("Hours: " + hoursSleptList[i]);
                         System.out.println("Rest: " + restRatings[i] + "/5");
-
                         total += hoursSleptList[i];
                     }
 
@@ -97,18 +105,20 @@ public class App {
 
                     System.out.println("\n--- Recommendation ---");
                     System.out.println("Average sleep: " + avgSleep + " hours");
-                    System.out.println("Average rest rating: " + avgRating + "/5");
 
                     if (avgSleep < 7 || avgRating <= 2) {
-                        System.out.println("Go to bed earlier. Aim for 7-9 hours of sleep.");
-                    } else if (avgSleep <= 9 && avgRating >= 3) {
-                        System.out.println("Your sleep schedule looks good. Stay consistent.");
+                        System.out.println("Go to bed earlier. Aim for more sleep.");
+                    } else if (avgSleep <= 9) {
+                        System.out.println("Your schedule looks good.");
                     } else {
-                        System.out.println("You may be oversleeping. Try waking up a bit earlier.");
+                        System.out.println("You may be oversleeping.");
                     }
                 }
 
             } else if (choice == 4) {
+                user.displayUserInfo();
+
+            } else if (choice == 5) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
