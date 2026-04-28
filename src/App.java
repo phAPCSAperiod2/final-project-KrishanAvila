@@ -4,21 +4,19 @@ public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        // Create user at start
-        System.out.println("Enter your age: ");
+        System.out.print("Enter your age: ");
         int age = input.nextInt();
 
-        System.out.println("Enter your height in inches: ");
+        System.out.print("Enter your height: ");
         double height = input.nextDouble();
 
-        System.out.println("Enter your weight: ");
+        System.out.print("Enter your weight: ");
         double weight = input.nextDouble();
 
         User user = new User(age, height, weight);
 
         boolean running = true;
 
-        // Store up to 7 days
         int[] sleepTimes = new int[7];
         int[] wakeTimes = new int[7];
         int[] hoursSleptList = new int[7];
@@ -103,16 +101,7 @@ public class App {
                     int avgSleep = totalSleep / count;
                     int avgRating = totalRating / count;
 
-                    System.out.println("\n--- Recommendation ---");
-                    System.out.println("Average sleep: " + avgSleep + " hours");
-
-                    if (avgSleep < 7 || avgRating <= 2) {
-                        System.out.println("Go to bed earlier. Aim for more sleep.");
-                    } else if (avgSleep <= 9) {
-                        System.out.println("Your schedule looks good.");
-                    } else {
-                        System.out.println("You may be oversleeping.");
-                    }
+                    Suggestion.giveSuggestion(avgSleep, avgRating, user.getAge());
                 }
 
             } else if (choice == 4) {
