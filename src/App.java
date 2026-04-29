@@ -90,18 +90,7 @@ public class App {
                 if (count == 0) {
                     System.out.println("No data to analyze.");
                 } else {
-                    int totalSleep = 0;
-                    int totalRating = 0;
-
-                    for (int i = 0; i < count; i++) {
-                        totalSleep += hoursSleptList[i];
-                        totalRating += restRatings[i];
-                    }
-
-                    int avgSleep = totalSleep / count;
-                    int avgRating = totalRating / count;
-
-                    Suggestion.giveSuggestion(avgSleep, avgRating, user.getAge());
+                    Suggestion.giveSuggestion(sleepTimes, hoursSleptList, restRatings, count, user.getAge());
                 }
 
             } else if (choice == 4) {
