@@ -68,6 +68,9 @@ public class App {
                 System.out.println("Hours slept: " + hoursSlept);
                 System.out.println("Rest rating: " + restRating + "/5");
 
+                // Instant feedback here
+                Suggestion.quickFeedback(hoursSlept, restRating, user.getAge());
+
             } else if (choice == 2) {
 
                 if (count == 0) {

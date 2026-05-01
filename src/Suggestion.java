@@ -1,5 +1,38 @@
 public class Suggestion {
 
+    public static void quickFeedback(int hoursSlept, int restRating, int age) {
+
+        System.out.println("\n--- Instant Feedback ---");
+
+        int recommendedMin;
+        int recommendedMax;
+
+        if (age <= 17) {
+            recommendedMin = 8;
+            recommendedMax = 10;
+        } else if (age <= 25) {
+            recommendedMin = 7;
+            recommendedMax = 9;
+        } else {
+            recommendedMin = 7;
+            recommendedMax = 8;
+        }
+
+        if (hoursSlept < recommendedMin) {
+            System.out.println("You did not get enough sleep. Try going to bed earlier.");
+        } else if (hoursSlept > recommendedMax) {
+            System.out.println("You may have overslept. Try waking up earlier.");
+        } else {
+            System.out.println("Your sleep duration is in a good range.");
+        }
+
+        if (restRating <= 2) {
+            System.out.println("You feel tired. Try improving your sleep routine.");
+        } else if (restRating >= 4) {
+            System.out.println("You feel well rested. Keep this pattern.");
+        }
+    }
+
     public static void giveSuggestion(int[] sleepTimes, int[] hoursSleptList, int[] restRatings, int count, int age) {
 
         System.out.println("\n--- Personalized Recommendation ---");
@@ -34,7 +67,6 @@ public class Suggestion {
 
         System.out.println("Recommended sleep: " + recommendedMin + "-" + recommendedMax + " hours");
 
-        // Sleep amount feedback
         if (avgSleep < recommendedMin) {
             System.out.println("You need more sleep. Try going to bed earlier.");
         } else if (avgSleep > recommendedMax) {
@@ -43,14 +75,12 @@ public class Suggestion {
             System.out.println("Your sleep amount is in a good range.");
         }
 
-        // Rest rating feedback
         if (avgRating <= 2) {
             System.out.println("You often feel tired. Improve your sleep habits.");
         } else if (avgRating >= 4) {
             System.out.println("You usually feel well rested.");
         }
 
-        // Consistency check
         if (count > 1) {
             int variation = 0;
 
@@ -67,7 +97,6 @@ public class Suggestion {
             }
         }
 
-        // Best and worst days
         int best = 0;
         int worst = 5;
 
