@@ -27,7 +27,7 @@ public class Suggestion {
         }
 
         if (restRating <= 2) {
-            System.out.println("You feel tired. Try improving your sleep routine.");
+            System.out.println("You feel tired. Improve your sleep routine.");
         } else if (restRating >= 4) {
             System.out.println("You feel well rested. Keep this pattern.");
         }
