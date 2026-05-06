@@ -1,36 +1,16 @@
 import java.util.Scanner;
 
 public class App {
+
+    static Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
 
-        int age;
-        while (true) {
-            System.out.print("Enter your age: ");
-            age = input.nextInt();
-            if (age > 0) break;
-            System.out.println("Invalid age. Try again.");
-        }
-
-        double height;
-        while (true) {
-            System.out.print("Enter your height: ");
-            height = input.nextDouble();
-            if (height > 0) break;
-            System.out.println("Invalid height. Try again.");
-        }
-
-        double weight;
-        while (true) {
-            System.out.print("Enter your weight: ");
-            weight = input.nextDouble();
-            if (weight > 0) break;
-            System.out.println("Invalid weight. Try again.");
-        }
+        int age = getValidInt("Enter your age: ", 1, 120);
+        double height = getValidDouble("Enter your height: ");
+        double weight = getValidDouble("Enter your weight: ");
 
         User user = new User(age, height, weight);
-
-        boolean running = true;
 
         int[] sleepTimes = new int[7];
         int[] wakeTimes = new int[7];
@@ -38,25 +18,13 @@ public class App {
         int[] restRatings = new int[7];
         int count = 0;
 
+        boolean running = true;
+
         System.out.println("\nSleep Tracker App");
 
         while (running) {
 
-            int choice;
-            while (true) {
-                System.out.println("\nMenu");
-                System.out.println("1. Enter sleep data");
-                System.out.println("2. View sleep history");
-                System.out.println("3. Get sleep recommendation");
-                System.out.println("4. View user info");
-                System.out.println("5. Exit");
-                System.out.print("Choose an option: ");
-
-                choice = input.nextInt();
-                if (choice >= 1 && choice <= 5) break;
-
-                System.out.println("Invalid choice. Try again.");
-            }
+            int choice = getValidInt("\n1. Enter sleep data\n2. View sleep history\n3. Get sleep recommendation\n4. View user info\n5. Exit\nChoose: ", 1, 5);
 
             if (choice == 1) {
 
@@ -65,36 +33,11 @@ public class App {
                     continue;
                 }
 
-                int sleepTime;
-                while (true) {
-                    System.out.print("Enter sleep time (0-23): ");
-                    sleepTime = input.nextInt();
-                    if (sleepTime >= 0 && sleepTime <= 23) break;
-                    System.out.println("Invalid input. Try again.");
-                }
+                int sleepTime = getValidInt("Enter sleep time (0-23): ", 0, 23);
+                int wakeTime = getValidInt("Enter wake time (0-23): ", 0, 23);
+                int restRating = getValidInt("How rested do you feel (1-5): ", 1, 5);
 
-                int wakeTime;
-                while (true) {
-                    System.out.print("Enter wake time (0-23): ");
-                    wakeTime = input.nextInt();
-                    if (wakeTime >= 0 && wakeTime <= 23) break;
-                    System.out.println("Invalid input. Try again.");
-                }
-
-                int hoursSlept;
-                if (wakeTime >= sleepTime) {
-                    hoursSlept = wakeTime - sleepTime;
-                } else {
-                    hoursSlept = (24 - sleepTime) + wakeTime;
-                }
-
-                int restRating;
-                while (true) {
-                    System.out.print("How rested do you feel? (1-5): ");
-                    restRating = input.nextInt();
-                    if (restRating >= 1 && restRating <= 5) break;
-                    System.out.println("Invalid input. Try again.");
-                }
+                int hoursSlept = calculateHours(sleepTime, wakeTime);
 
                 sleepTimes[count] = sleepTime;
                 wakeTimes[count] = wakeTime;
@@ -102,33 +45,13 @@ public class App {
                 restRatings[count] = restRating;
                 count++;
 
-                System.out.println("\n--- Sleep Summary ---");
-                System.out.println("Sleep time: " + sleepTime);
-                System.out.println("Wake time: " + wakeTime);
-                System.out.println("Hours slept: " + hoursSlept);
-                System.out.println("Rest rating: " + restRating + "/5");
-                System.out.println("Stored days: " + count + "/7");
+                printSummary(sleepTime, wakeTime, hoursSlept, restRating, count);
 
                 Suggestion.quickFeedback(hoursSlept, restRating, user.getAge());
 
             } else if (choice == 2) {
 
-                if (count == 0) {
-                    System.out.println("No sleep data yet. Add entries first.");
-                } else {
-                    int total = 0;
-
-                    for (int i = 0; i < count; i++) {
-                        System.out.println("\nDay " + (i + 1));
-                        System.out.println("Sleep: " + sleepTimes[i]);
-                        System.out.println("Wake: " + wakeTimes[i]);
-                        System.out.println("Hours: " + hoursSleptList[i]);
-                        System.out.println("Rest: " + restRatings[i] + "/5");
-                        total += hoursSleptList[i];
-                    }
-
-                    System.out.println("\nAverage sleep: " + (total / count) + " hours");
-                }
+                printHistory(sleepTimes, wakeTimes, hoursSleptList, restRatings, count);
 
             } else if (choice == 3) {
 
@@ -139,14 +62,74 @@ public class App {
                 }
 
             } else if (choice == 4) {
+
                 user.displayUserInfo();
 
             } else if (choice == 5) {
+
                 running = false;
                 System.out.println("Goodbye!");
             }
         }
+    }
 
-        input.close();
+    public static int getValidInt(String prompt, int min, int max) {
+        int value;
+        while (true) {
+            System.out.print(prompt);
+            value = input.nextInt();
+            if (value >= min && value <= max) break;
+            System.out.println("Invalid input. Try again.");
+        }
+        return value;
+    }
+
+    public static double getValidDouble(String prompt) {
+        double value;
+        while (true) {
+            System.out.print(prompt);
+            value = input.nextDouble();
+            if (value > 0) break;
+            System.out.println("Invalid input. Try again.");
+        }
+        return value;
+    }
+
+    public static int calculateHours(int sleepTime, int wakeTime) {
+        if (wakeTime >= sleepTime) {
+            return wakeTime - sleepTime;
+        } else {
+            return (24 - sleepTime) + wakeTime;
+        }
+    }
+
+    public static void printSummary(int sleepTime, int wakeTime, int hours, int rating, int count) {
+        System.out.println("\n--- Sleep Summary ---");
+        System.out.println("Sleep time: " + sleepTime);
+        System.out.println("Wake time: " + wakeTime);
+        System.out.println("Hours slept: " + hours);
+        System.out.println("Rest rating: " + rating + "/5");
+        System.out.println("Stored days: " + count + "/7");
+    }
+
+    public static void printHistory(int[] sleepTimes, int[] wakeTimes, int[] hours, int[] ratings, int count) {
+
+        if (count == 0) {
+            System.out.println("No sleep data yet.");
+            return;
+        }
+
+        int total = 0;
+
+        for (int i = 0; i < count; i++) {
+            System.out.println("\nDay " + (i + 1));
+            System.out.println("Sleep: " + sleepTimes[i]);
+            System.out.println("Wake: " + wakeTimes[i]);
+            System.out.println("Hours: " + hours[i]);
+            System.out.println("Rest: " + ratings[i] + "/5");
+            total += hours[i];
+        }
+
+        System.out.println("\nAverage sleep: " + (total / count) + " hours");
     }
 }

@@ -2,188 +2,73 @@
 # AP Computer Science A – Final Project
 ## Software & Systems Development Capstone
 
-Welcome to your **Final Project repository**.
+Sleep Tracker App
+Project Description
 
-This repository will hold:
-- Your complete Java project
-- Your project journal and planning artifacts
-- Your final, working software product
+This program helps users track their sleep habits and improve their sleep schedule. The user enters when they go to sleep, when they wake up, and how rested they feel. The program stores this data, analyzes patterns, and provides both instant feedback and long term recommendations based on age and behavior. This project stands out because it combines user input, data tracking, and personalized suggestions in a simple console based app.
 
-This is not just an assignment — it is a **capstone software project**.
+Features
+Menu driven interface for easy navigation
+Input sleep and wake times
+Calculate total hours slept
+Daily rest rating system
+Instant feedback after each entry
+Stores up to 7 days of sleep data
+View sleep history and averages
+Personalized recommendations based on age
+Detects inconsistent sleep patterns
+Input validation to prevent errors
+Code Structure and Design
 
----
+The program uses three main classes:
 
-## 📌 Project Overview (Read Carefully)
+App
+Handles user interaction, menu system, and program flow
+User
+Stores personal data such as age, height, and weight
+Suggestion
+Contains logic for instant feedback and long term recommendations
 
-In this project, you will:
-- Design and build a **real piece of software**
-- Solve **one real problem** for **one clearly defined user**
-- Work using **agile development**
-- Show evidence of **professional software practices**
-- Use AI responsibly as a planning and support tool
+Objects interact through method calls. The App class collects data and passes it to the Suggestion class for analysis. The User object provides age data for personalized recommendations.
 
-You will leave this course with something you can confidently say:
+Data is stored using arrays. These arrays track sleep times, wake times, hours slept, and rest ratings over multiple days.
 
-> “I built this software.”
+No inheritance or interfaces are used. The design focuses on clear separation of responsibilities between classes.
 
----
+UML Diagram
+The UML diagram should be added here as an image file in your project folder.
 
-## 🔁 Required Workflow (How You Must Work)
+How to Run the Program
+Make sure all files are in the same folder
+App.java
+User.java
+Suggestion.java
+Compile the program
+javac App.java
+Run the program
+java App
+Follow the menu options
+Enter sleep data
+View history
+Get recommendations
+View user info
+Exit
+Input rules
+Sleep and wake time must be between 0 and 23
+Rest rating must be between 1 and 5
+Development Process
 
-### ✅ Daily GitHub Commits (Required)
-You are expected to:
-- Make **at least one meaningful commit every class day**
-- Write **descriptive commit messages** that explain:
-  - What you changed
-  - Why you changed it
-  - What goal it supports
+One challenge was organizing the code as it became more complex. The program started in one class and became harder to manage. This was solved by separating logic into methods and creating new classes for user data and suggestions.
 
-✅ Good commit messages:
-- `Sprint 1: Created Player class and tested constructor`
-- `Sprint 2: Implemented 2D map and verified movement logic`
+One improvement would be storing more than 7 days of data using dynamic structures like ArrayLists and adding a graphical interface.
 
-🚫 Poor commit messages:
-- `updates`
-- `stuff`
-- `final version`
+Use of AI Tools
 
-Your commit history is **evidence of your thinking and progress**.
+ChatGPT was used to help brainstorm features, structure the program, and debug code. It was also used to refactor code into cleaner methods and improve readability. All code was reviewed, tested, and fully understood before being used in the final project.
 
----
+Author Information
 
-## 🔁 Agile Development & Sprints
+Name: Krishan Avila
+Course: AP Computer Science A
 
-You will complete **4 sprints**.  
-Each sprint includes:
-- Planning
-- Building
-- Testing
-- Feedback and reflection
-
-Each sprint ends with:
-- A sprint grade
-- A sprint reflection
-- Feedback exchanged with peers
-
-🚫 You may NOT complete multiple sprints at once.  
-✅ Each sprint grade is **final**.
-
----
-
-## 🧪 Testing Expectations
-
-Testing is required every sprint.
-
-✅ Testing may include:
-- Running the program with different inputs
-- Print‑based testing
-- Driver program testing
-- Verifying logic and edge cases
-
-You should be able to explain:
-- What you tested
-- How you tested it
-- What you discovered or fixed
-
----
-
-## 🗂️ Required Project Components
-
-Your final project must include:
-
-- ✅ Multiple interacting Java classes
-- ✅ Encapsulation (`private` fields, appropriate getters/setters)
-- ✅ Arrays and/or ArrayLists
-- ✅ A purposeful **2D array**
-- ✅ A working driver program (`main`)
-- ✅ A class diagram matching your final code
-- ✅ Clear documentation
-- ✅ A program that runs and works
-
-Inheritance and interfaces are optional but encouraged.
-
----
-
-## 🤖 Using AI (Allowed, With Responsibility)
-
-You may use AI to:
-- Organize ideas
-- Plan sprints
-- Debug code
-- Suggest design improvements
-
-You must:
-- Document how you used AI
-- Review and evaluate AI suggestions
-- Understand and explain your final code
-
-AI should act like:
-> A junior developer you supervise — not something that builds the project for you.
-
----
-
-## 📘 Project Journal
-
-All planning, work logs, testing notes, and reflections live in **your project journal**.
-
-If it happened during this project, it should be documented there.
-
----
-
-## ✅ Final Submission Expectations
-
-By the end of the project:
-- Your program should run reliably
-- Your technical requirements should be met
-- Your code should be readable and organized
-- Your repository should look **professional**
-
----
-
-# ✨ Final Step: README Update (Very Important)
-
-When your project is complete, you must **rewrite this README**  
-so it reflects **your software**, not the assignment.
-
-Your final README should include:
-
----
-
-## 🔹 Project Title
-
-## 🔹 What This Software Does
-Explain your project in plain language.
-
-## 🔹 Who It’s For
-Describe the user and the problem being solved.
-
-## 🔹 How to Run the Program
-Clear steps so someone else can run your project.
-
-## 🔹 Technical Overview
-Brief description of:
-- Main classes
-- Key data structures
-- Program logic
-
-## 🔹 Class Diagram
-Include or link your final class diagram.
-
-## 🔹 Known Limitations / Future Improvements
-What works well, and what you would improve with more time.
-
----
-
-## 🎯 Final Reminder
-
-This repository represents **you as a developer**.
-
-Take pride in:
-- Your process
-- Your commits
-- Your code
-- Your documentation
-
-Build something real.  
-Build it thoughtfully.  
-Build it well.
+This project helped build skills in organizing code, handling user input, and designing programs with multiple classes.
