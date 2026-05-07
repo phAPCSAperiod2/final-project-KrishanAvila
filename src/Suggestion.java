@@ -1,5 +1,19 @@
+/**
+ * The Suggestion class provides instant feedback
+ * and long term sleep recommendations.
+ *
+ * Author: Krishan Avila
+ * Course: AP Computer Science A
+ */
 public class Suggestion {
 
+    /**
+     * Gives instant feedback after a sleep entry.
+     *
+     * @param hoursSlept Hours slept
+     * @param restRating User rest rating
+     * @param age User age
+     */
     public static void quickFeedback(int hoursSlept, int restRating, int age) {
 
         System.out.println("\n--- Instant Feedback ---");
@@ -33,7 +47,17 @@ public class Suggestion {
         }
     }
 
-    public static void giveSuggestion(int[] sleepTimes, int[] hoursSleptList, int[] restRatings, int count, int age) {
+    /**
+     * Gives long term recommendations based on stored data.
+     *
+     * @param sleepTimes Array of sleep times
+     * @param hoursSleptList Array of hours slept
+     * @param restRatings Array of rest ratings
+     * @param count Number of stored entries
+     * @param age User age
+     */
+    public static void giveSuggestion(int[] sleepTimes, int[] hoursSleptList,
+                                      int[] restRatings, int count, int age) {
 
         System.out.println("\n--- Personalized Recommendation ---");
 
@@ -65,23 +89,25 @@ public class Suggestion {
             recommendedMax = 8;
         }
 
-        System.out.println("Recommended sleep: " + recommendedMin + "-" + recommendedMax + " hours");
+        System.out.println("Recommended sleep: "
+                + recommendedMin + "-" + recommendedMax + " hours");
 
         if (avgSleep < recommendedMin) {
-            System.out.println("You need more sleep. Try going to bed earlier.");
+            System.out.println("You need more sleep.");
         } else if (avgSleep > recommendedMax) {
-            System.out.println("You may be oversleeping. Try waking up earlier.");
+            System.out.println("You may be oversleeping.");
         } else {
             System.out.println("Your sleep amount is in a good range.");
         }
 
         if (avgRating <= 2) {
-            System.out.println("You often feel tired. Improve your sleep habits.");
+            System.out.println("You often feel tired.");
         } else if (avgRating >= 4) {
             System.out.println("You usually feel well rested.");
         }
 
         if (count > 1) {
+
             int variation = 0;
 
             for (int i = 1; i < count; i++) {
@@ -91,7 +117,7 @@ public class Suggestion {
             int avgVariation = variation / (count - 1);
 
             if (avgVariation > 3) {
-                System.out.println("Your sleep schedule is inconsistent. Try sleeping at the same time each night.");
+                System.out.println("Your sleep schedule is inconsistent.");
             } else {
                 System.out.println("Your sleep schedule is fairly consistent.");
             }
@@ -101,8 +127,14 @@ public class Suggestion {
         int worst = 5;
 
         for (int i = 0; i < count; i++) {
-            if (restRatings[i] > best) best = restRatings[i];
-            if (restRatings[i] < worst) worst = restRatings[i];
+
+            if (restRatings[i] > best) {
+                best = restRatings[i];
+            }
+
+            if (restRatings[i] < worst) {
+                worst = restRatings[i];
+            }
         }
 
         System.out.println("Best rest rating: " + best + "/5");
